@@ -97,7 +97,7 @@ nav {
 
 .nav-links a.active::after {
   content: '';
-  display: block;
+  display: contents;
   width: 4px;
   height: 4px;
   background: var(--orange);
@@ -124,21 +124,21 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  min-height: 100vh;
+  min-height: 98vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0 48px;
-  padding-top: 68px;
+  padding-top: 120px;
   position: relative;
   overflow: hidden;
 }
 
 .hero-bg-text {
   position: absolute;
-  bottom: -60px;
-  left: -20px;
-  font-size: clamp(120px, 20vw, 280px);
+  bottom: -40px;
+  left: -25px;
+  font-size: clamp(120px, 16vw, 280px);
   font-weight: 900;
   color: rgba(255, 255, 255, 0.03);
   letter-spacing: -0.04em;
@@ -168,7 +168,7 @@ nav {
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(48px, 8vw, 110px);
+  font-size: clamp(48px, 7vw, 110px);
   font-weight: 400;
   line-height: 1.0;
   letter-spacing: -0.03em;
@@ -182,7 +182,7 @@ nav {
 
 .hero-sub {
   margin-top: 32px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: var(--gray-600);
   max-width: 440px;
   line-height: 1.8;
@@ -296,7 +296,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-width: 760px;
+  max-width: max-width: 100%;
   border-top: 1px solid var(--gray-200);
 }
 
