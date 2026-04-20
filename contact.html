@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Kevin</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .error-msg {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: rgba(255, 60, 60, 0.1);
+      border: 1px solid #ff3c3c;
+      color: #ff3c3c;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+    }
+    .success-msg {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: rgba(255, 92, 26, 0.12);
+      border: 1px solid var(--orange);
+      color: var(--orange);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">K<span>.</span>evin</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="works.html">Works</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <p class="section-tag">Contact</p>
+      <h1 class="section-title">Let's work<br>together.</h1>
+      <p>새로운 프로젝트, 협업 제안, 또는 그냥 인사라도 환영합니다.
+         메시지를 남겨주세요.</p>
+    </div>
+  </div>
+
+  <!-- CONTACT LAYOUT -->
+  <div class="contact-layout">
+
+    <!-- LEFT: INFO -->
+    <div class="contact-info">
+      <h2>이야기를<br><em>시작해봐요.</em></h2>
+      <p>
+        프로젝트의 규모와 관계없이 모든 문의를 환영합니다.
+        48시간 이내에 답장 드리겠습니다.
+      </p>
+      <div class="contact-details">
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Email</span>
+          <span class="contact-detail-value">hello@kevindesigns.kr</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Based in</span>
+          <span class="contact-detail-value">Seoul, South Korea</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Available for</span>
+          <span class="contact-detail-value">Freelance &amp; Full-time</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Response time</span>
+          <span class="contact-detail-value">Within 48 hours</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="contact-form">
+      <form id="contactForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="name">Name</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="홍길동" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="hello@example.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="subject">Subject</label>
+          <input class="form-input" type="text" id="subject" name="subject" placeholder="프로젝트 문의" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="프로젝트에 대해 간략히 설명해 주세요..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">Send Message →</button>
+        <div class="success-msg" id="successMsg">
+          ✓ 메시지를 보냈습니다. 곧 답장 드리겠습니다!
+        </div>
+        <div class="error-msg" id="errorMsg">
+          ✕ 전송에 실패했습니다. 잠시 후 다시 시도해주세요.
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">K<span>.</span>evin</div>
+    <p class="footer-copy">© 2026 Kevin. All rights reserved.</p>
+    <div class="footer-social">
+      <a href="#">Behance</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    // ※ Formspree 가입 후 발급받은 Form ID로 교체하세요
+    //   https://formspree.io → New Form → 이메일 입력 → ID 복사
+    const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+    const form = document.getElementById('contactForm');
+    const btn  = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg   = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // 유효성 검사
+      const name    = form.name.value.trim();
+      const email   = form.email.value.trim();
+      const message = form.message.value.trim();
+      if (!name || !email || !message) {
+        errorMsg.textContent = '✕ 이름, 이메일, 메시지는 필수 항목입니다.';
+        errorMsg.style.display = 'block';
+        setTimeout(() => { errorMsg.style.display = 'none'; }, 4000);
+        return;
+      }
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form),
+        });
+
+        if (res.ok) {
+          successMsg.style.display = 'block';
+          form.reset();
+          setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
+        } else {
+          const data = await res.json();
+          throw new Error(data?.errors?.[0]?.message || 'Server error');
+        }
+      } catch (err) {
+        console.error(err);
+        errorMsg.textContent = '✕ 전송에 실패했습니다. 잠시 후 다시 시도해주세요.';
+        errorMsg.style.display = 'block';
+        setTimeout(() => { errorMsg.style.display = 'none'; }, 5000);
+      } finally {
+        btn.textContent = 'Send Message →';
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
